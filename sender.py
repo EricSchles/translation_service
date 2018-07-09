@@ -34,5 +34,6 @@ def send_data(text, url):
     to deploy anything!  Then this function can be called from the dynamically generated
     web address by PyPageKite.  This allows you to use it as a true service on the internet.
     """
+    dutch_text = {}
     dutch_text["text"] = text
-    requests.post(url, json=json.dumps(dutch_text))
+    return requests.post(url, json=json.dumps(dutch_text))

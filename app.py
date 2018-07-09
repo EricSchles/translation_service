@@ -1,10 +1,8 @@
-from sanic import Sanic, request
 from googletrans import Translator
 import json
-from multiprocessing import cpu_count
-from sanic_cors import CORS
+from flask import Flask, request
 
-app = Sanic(__name__)
+app = Flask(__name__)
 
 def translate(text):
 	"""
@@ -28,7 +26,7 @@ def translate(text):
 	return translator.translate(text, src="nl").text
 
 @app.route("/", methods=["GET", "POST"])
-async def index():
+def index():
 	json_data = request.get_json()
 	data = json.loads(json_data)
 	dutch = data["text"]
@@ -39,4 +37,4 @@ async def index():
 	return json.dumps(result) 
 
 if __name__ == '__main__':
-        app.run(workers=cpu_count())
+        app.run()
